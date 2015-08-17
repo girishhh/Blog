@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+iframe {border-color: black}
+
+text {color:blue}
+body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
+color:yellow
+ }
+</style>
+<body >
+<br><br><br>
+post title:  <%= @post.title%><br>  submitted
+ <%= time_ago_in_words(@post.updated_at) %><br><br><br><hr> postbody:
+<%=@post.body%>
+<br><br><br><hr>
+
+
+post image: <%= image_tag @post.image.url(:medium) %><br><br><br><hr>
+<iframe width="150" height="150" src="<%= "http://www.youtube.com/embed/"+@post.video.split("=").last if @post.video.present?%>" alt="video is not avaialable">
+</iframe>
+<br><br><br><hr>
+
+
+</body>
+</html>

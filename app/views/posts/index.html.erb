@@ -1,0 +1,67 @@
+
+<html>
+<style type="text/css">
+label {color: blue}
+th {color:yellow}
+td {color:green}
+iframe {color:black}
+body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
+ }
+</style>
+<body >
+
+
+<div class="page-header">
+<h1>All posts</h1>
+</div>
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+  <% end %>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+     <th>video</th>
+    <th>image</th>
+    <th>Title</th>
+    <th>body</th>
+    <th>time</th>
+    <th>email</th>
+    <th>edit</th>
+    <th>delete</th>
+    <th>show</th>
+    <th colspan="5"></th>
+  </tr>
+</thead>
+  <% @post.each do |msg| %>
+    <tr class="info">
+      <td><iframe width="150" height="150" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>">
+</iframe></td>
+      <td><%= image_tag msg.image.url(:thumb) %></td>
+      <td><%= msg.title %></td>
+      <td><%= msg.body.first(10) %></td>
+      <td><%= time_ago_in_words(msg.updated_at)%> ago</td>
+      <td><%= msg.user.email %></td>
+      <td><%if current_user.id==msg.user_id%>
+        <%= link_to 'Edit', edit_post_path(msg) %>
+         <%end%>
+      </td>
+      <td>
+        <%if current_user.id==msg.user_id%>
+        <%= link_to 'Delete', post_path(msg),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+         <%end%>
+      </td>
+
+      <td><%= link_to 'Show', post_path(msg) %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+
+
+
+</body>
+</html>
