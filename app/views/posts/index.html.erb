@@ -6,7 +6,9 @@ th {color:yellow}
 td {color:green}
 iframe {color:black}
 body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
+
  }
+ h1 {color:white}
 </style>
 <body >
 
@@ -18,30 +20,29 @@ body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd
 <%= flash[:notice] %>
   <% end %>
 
-<table class="table table-bordered">
+<table class="table table-bordered" style="border: 3px solid yellow">
   <thead>
-  <tr>
-     <th>video</th>
+  <tr width="2px solid yellow">
+    <th>user</th>
     <th>image</th>
     <th>Title</th>
     <th>body</th>
     <th>time</th>
-    <th>email</th>
+    <th>video</th>
     <th>edit</th>
     <th>delete</th>
     <th>show</th>
-    <th colspan="5"></th>
   </tr>
 </thead>
   <% @post.each do |msg| %>
     <tr class="info">
-      <td><iframe width="150" height="150" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>">
-</iframe></td>
+      <td ><%= msg.user.email %></td>
       <td><%= image_tag msg.image.url(:thumb) %></td>
       <td><%= msg.title %></td>
       <td><%= msg.body.first(10) %></td>
       <td><%= time_ago_in_words(msg.updated_at)%> ago</td>
-      <td><%= msg.user.email %></td>
+      <td><iframe width="150" height="150" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>">
+</iframe></td>
       <td><%if current_user.id==msg.user_id%>
         <%= link_to 'Edit', edit_post_path(msg) %>
          <%end%>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-.navbar-right {
-   padding-right: 15px;
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 30px;
 
-
+float: right;
 }
-li {color:yellow}
 
 </style>
 <head>
@@ -17,10 +19,14 @@ li {color:yellow}
 </head>
 <body>
 
-  <ul class="navbar-right">
-  <li><%= link_to 'sign out',destroy_user_session_path ,:method=>:delete,:style => 'color: #FFFFFF'%><br><br></li>
-  <li><%= link_to 'new post',new_post_path, :style => 'color: #FFFFFF'%></li><br><br>
+ <div id="navcontainer">
+  <ul id="navlist">
+ <li><%= button_to 'Sign out', destroy_user_session_path,:method => :delete, :style=>"background:yellow"%></li>
+  <li><%= button_to 'New post', new_post_path,:method => :get, :style=>"background:yellow"%></li>
+
+
 </ul>
+</div>
 
 <%= yield %>
 

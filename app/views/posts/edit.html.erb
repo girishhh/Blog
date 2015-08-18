@@ -4,6 +4,12 @@
 label {color: yellow}
 body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
  }
+ .container {
+  margin:1%;
+
+}
+label {display: block;}
+
 </style>
 <body >
 
@@ -27,26 +33,37 @@ body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd
   <% end %>
 
 <p>
-<%= f.label :video%><br>
-<%= f.text_field :video%><br>
+  <div class="container">
+<%= f.label :video%>
+<%= f.text_field :video%>
+</div>
 </p>
 
 <p>
+  <div class="container">
 <%= f.label :image%><br>
 <%= f.file_field :image%><br>
+</div>
 </p>
+
   <p>
+    <div class="container">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
+  </div>
   </p>
 
   <p>
+    <div class="container">
     <%= f.label :body %><br>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, :rows=>"6",:cols =>135 %>
+  </div>
   </p>
 
   <p>
+    <div class="container">
     <%=f.submit %>
+  </div>
   </p>
 
 <% end %>

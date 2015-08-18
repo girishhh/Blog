@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 before_filter :authenticate_user!
-layout "layout2", :only => [:show,:edit]
+
 
   def new
     @current_user = current_user
@@ -19,6 +19,7 @@ layout "layout2", :only => [:show,:edit]
     if(@post.user_id != current_user.id)
       redirect_to posts_path flash[:notice] = "you are not permitted to edit this post::it belongs to other user "
     end
+    render layout: "layout5"
   end
 
   def update
@@ -53,6 +54,7 @@ layout "layout2", :only => [:show,:edit]
 
   def show
     @post=Post.find(params[:id])
+
   end
 
   private

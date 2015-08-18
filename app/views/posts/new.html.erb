@@ -3,10 +3,15 @@
 <style type="text/css">
 label {color: yellow}
 body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
+color:red;
  }
-.align{
-    vertical-align: middle;
+
+.container {
+  margin:1%;
+
 }
+label {display: block;}
+
 </style>
 <body >
 
@@ -17,6 +22,7 @@ body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd
 </div>
 
 <% if @post.errors.any? %>
+
     <div id="error_explanation">
       <h2>
         <%= pluralize(@post.errors.count, "error") %> prohibited
@@ -37,28 +43,46 @@ body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd
 
 
 <p>
+  <div class="container">
   <%= f.label :title %>
-<%= f.text_field :title%><br>
+  <%= f.text_field :title%><br>
+</div>
 </p>
-<p>
-  <p class="align">
-  <%= f.label :body%>
-  </p>
+
+
+
+
+
+
+  <p>
+ <div class="container">
+  <%=f.label :body %>
   <%= f.text_area :body, :rows=>"6",:cols =>155 %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+   <%= f.hidden_field :user_id, :value => current_user.id %>
   </p>
 
-<p>
-<%= f.label :image%><br>
-<%= f.file_field :image%><br>
-</p>
-<p>
-<%= f.label :video%><br>
-<%= f.text_field :video%><br>
-</p>
+
+
 
 <p>
+<div class="container">
+<%= f.label :image%>
+<%= f.file_field :image%>
+</div>
+</p>
+<br>
+<p>
+  <div class="container">
+<%= f.label :videoURL %>
+<%= f.text_field :video%>
+</div>
+</p>
+<br>
+<p>
+  <div class="container">
   <%= f.submit%>
+</div>
   </p>
   <%end%>
 

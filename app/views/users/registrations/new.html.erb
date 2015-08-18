@@ -1,5 +1,36 @@
-<h2>Sign up</h2>
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+label {color: black}
+body {background-image: url("http://img.phombo.com/img1/photocombo/181701/100_HD_Nature_Wallpapers_HQPixsBlog-9.jpg_HQ_Pixs_Blog_14.jpg");
+background-repeat: no-repeat;
+color:black;
+ }
+.vertical-center {
 
+position: fixed;
+  top: 30%;
+  left: 38%;
+
+
+}
+h2 {color:white}
+.panel > .panel-heading {
+
+    background-color: light-blue;
+    color: black;
+
+}
+
+
+</style>
+<body>
+<h2>Sign up</h2>
+<div class="vertical-center">
+<div class="panel panel-default">
+  <div class="panel-heading custom_class" >
+  <div class="panel-body">
+    <h4>Sign up</h4>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
@@ -27,3 +58,11 @@
 <% end %>
 
 <%= render "users/shared/links" %>
+
+</body>
+</div>
+</div>
+</div>
+</div>
+</html>
+

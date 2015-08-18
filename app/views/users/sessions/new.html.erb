@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-label {color: yellow}
+label {color: black}
 body {background-image: url("http://img.phombo.com/img1/photocombo/181701/100_HD_Nature_Wallpapers_HQPixsBlog-9.jpg_HQ_Pixs_Blog_14.jpg");
+background-repeat: no-repeat;
+color:black;
  }
 .vertical-center {
 
@@ -12,24 +14,25 @@ position: fixed;
 
 
 }
-h2 {color:white}
+h2 { float:middle}
 .panel > .panel-heading {
-    background-image: url("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSadwPTbo94hoxfCmWyEMS2F93lzYEfPIEUM_qyq2X36KWzuDqnXA");
-    background-color: violet;
-    color: white;
+
+    background-color: light-blue;
+    color: black;
 
 }
 
 
 </style>
 <body>
-<h2>Log in</h2>
+
 
 
 <div class="vertical-center">
 <div class="panel panel-default">
   <div class="panel-heading custom_class" >
   <div class="panel-body">
+    <h4>Log in</h4>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 <div class="field">
     <%= f.label :email %><br />

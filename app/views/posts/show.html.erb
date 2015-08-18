@@ -1,27 +1,37 @@
-
-<!DOCTYPE html>
-<html>
 <style type="text/css">
-iframe {border-color: black}
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 30px;
 
-text {color:blue}
-body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
-color:yellow
- }
+float: right;
+}
 </style>
-<body >
+<div class="panel panel-default">
+  <div class="panel-heading custom_class" >
+  <div class="panel-body">
+    <div id="navcontainer">
+  <ul id="navlist">
+    <li><%= button_to 'Edit', edit_post_path(@post),:method => :get, :style=>"background:lightblue"%></li>
+    <li><%= button_to 'New post', new_post_path,:method => :get, :style=>"background:lightblue"%></li>
+    <li><%= button_to 'Sign out', destroy_user_session_path,:method => :delete, :style=>"background:lightblue"%></li>
+    <li><%= button_to 'All posts', posts_path,:method => :get, :style=>"background:lightblue"%></li>
+  </ul>
+</div>
+ <h1>Title:</h1> <h2> <%= @post.title%></h2> ( submitted
+ <%= time_ago_in_words(@post.updated_at) %>  ago)
+
+ <br><br><br>
+ post image: <%= image_tag @post.image.url(:medium) %>
+
 <br><br><br>
-post title:  <%= @post.title%><br>  submitted
- <%= time_ago_in_words(@post.updated_at) %><br><br><br><hr> postbody:
+description:
 <%=@post.body%>
-<br><br><br><hr>
+<br><br><br>
 
-
-post image: <%= image_tag @post.image.url(:medium) %><br><br><br><hr>
-<iframe width="150" height="150" src="<%= "http://www.youtube.com/embed/"+@post.video.split("=").last if @post.video.present?%>" alt="video is not avaialable">
-</iframe>
-<br><br><br><hr>
-
-
-</body>
-</html>
+<iframe width="250" height="250" src="<%= "http://www.youtube.com/embed/"+@post.video.split("=").last if @post.video.present?%>" alt="video is not avaialable">
+</iframe><br><br>
+</div>
+</div>
+</div>
