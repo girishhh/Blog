@@ -9,7 +9,11 @@ before_filter :authenticate_user!
   end
 
   def index
+    if params[:tag]
+    @post = Post.tagged_with(params[:tag])
+    else
     @post = Post.all
+    end
     render layout: "layout4"
   end
 
@@ -59,6 +63,6 @@ before_filter :authenticate_user!
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, :user_id,:image,:video)
+    params.require(:post).permit(:title, :body, :user_id,:image,:video,:tag_list)
   end
 end

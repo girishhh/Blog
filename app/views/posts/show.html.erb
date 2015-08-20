@@ -27,11 +27,13 @@ float: right;
 
 <br><br><br>
 description:
-<%=@post.body%>
+<%=@post.body%><br>
+<h4>Tags:</h4><%=@post.tag_list%>
 <br><br><br>
 
 <iframe width="250" height="250" src="<%= "http://www.youtube.com/embed/"+@post.video.split("=").last if @post.video.present?%>" alt="video is not avaialable">
 </iframe><br><br>
+
 </div>
 </div>
 </div>

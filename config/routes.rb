@@ -9,7 +9,7 @@ resources :users do
   resources :posts
 end
 
-
+get 'tags/:tag', to: 'posts#index', as: :tag
 
 #match "posts#show"=>"posts#edit"
   #root :to "/users/sign_in"

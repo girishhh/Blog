@@ -18,7 +18,7 @@ label {display: block;}
 
 
 <div class="page-header">
-<h1>New post</h1>
+<h1>Add post</h1>
 </div>
 
 <% if @post.errors.any? %>
@@ -50,7 +50,12 @@ label {display: block;}
 </p>
 
 
-
+<p>
+<div class="container">
+<%= f.label :tag_list, "Tags (separated by commas)" %><br />
+<%= f.text_field :tag_list %>
+</div>
+</p>
 
 
 

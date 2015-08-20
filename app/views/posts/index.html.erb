@@ -1,17 +1,29 @@
-
+<!DOCTYPE html>
 <html>
 <style type="text/css">
-label {color: blue}
+label {color: red}
 th {color:yellow}
+link_to {color: red;}
 td {color:green}
 iframe {color:black}
 body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
-
+color: red
  }
  h1 {color:white}
+.temp{
+  color: red
+}
+#tag_cloud {
+  width: 400px;
+  line-height: 1.6em;
+  .s { font-size: 0.8em; color: red;}
+  .m { font-size: 1.2em;color: red; }
+  .l { font-size: 1.8em; color: red;}
+
+}
+
 </style>
 <body >
-
 
 <div class="page-header">
 <h1>All posts</h1>
@@ -19,6 +31,19 @@ body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd
 <% if flash[:notice] %>
 <%= flash[:notice] %>
   <% end %>
+
+<div id="tag_cloud">
+  <div class="panel panel-default">
+  <div class="panel-heading custom_class" >
+  <div class="panel-body">
+  <h4>Tags:</h4>
+  <% tag_cloud Post.tag_counts, %w{s m l} do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+  </div>
+  </div>
+</div>
+</div>
 
 <table class="table table-bordered" style="border: 3px solid yellow">
   <thead>
@@ -32,9 +57,11 @@ body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd
     <th>edit</th>
     <th>delete</th>
     <th>show</th>
+    <th>tags</th>
   </tr>
 </thead>
   <% @post.each do |msg| %>
+
     <tr class="info">
       <td ><%= msg.user.email %></td>
       <td><%= image_tag msg.image.url(:thumb) %></td>
@@ -56,6 +83,7 @@ body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd
       </td>
 
       <td><%= link_to 'Show', post_path(msg) %></td>
+      <td><%= raw msg.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
     </tr>
   <% end %>
 </table>
