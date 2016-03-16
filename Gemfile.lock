@@ -151,6 +151,3 @@ DEPENDENCIES
   sqlite3
   strong_parameters
   uglifier (>= 1.0.3)
-
-BUNDLED WITH
-   1.10.4
