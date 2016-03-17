@@ -5,7 +5,15 @@ gem  'paperclip','~> 4.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
+group :production do
+  gem 'pg'
+end
+
+group :development, :test do
+  gem 'sqlite3'
+end
+
 gem 'strong_parameters'
 gem 'devise'
 gem 'acts-as-taggable-on'
