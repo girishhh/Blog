@@ -12,6 +12,7 @@ gem 'pg'
 group :development, :test do
   gem 'sqlite3'
 end
+gem 'therubyracer'
 
 gem 'strong_parameters'
 gem 'devise'
