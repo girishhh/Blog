@@ -148,5 +148,6 @@ DEPENDENCIES
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
+  sprockets (< 3.0.0)
   strong_parameters
   uglifier (>= 1.0.3)
