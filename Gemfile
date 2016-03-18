@@ -6,13 +6,13 @@ gem  'paperclip','~> 4.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-
-gem 'pg'
+group :production do
+	gem 'pg'
+end
 
 group :development, :test do
   gem 'sqlite3'
 end
-gem 'therubyracer'
 
 gem 'strong_parameters'
 gem 'devise'
