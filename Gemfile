@@ -8,6 +8,7 @@ gem  'paperclip','~> 4.2'
 
 group :production do
 	gem 'pg'
+	gem 'test-unit'
 end
 
 group :development, :test do

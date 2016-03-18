@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          has_many :posts
   # attr_accessible :title, :body
+  after_create :send_email
+  def send_email
+  	UserMailer.fm_response(self.email).deliver
+	end
 end
