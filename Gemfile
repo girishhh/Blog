@@ -13,7 +13,7 @@ end
 group :development, :test do
   gem 'sqlite3'
 end
-
+gem 'sprockets-rails'
 gem 'strong_parameters'
 gem 'devise'
 gem 'acts-as-taggable-on'
