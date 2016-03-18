@@ -143,14 +143,14 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  bootstrap-sass (~> 3.3.5)
+  bootstrap-sass
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails
   paperclip (~> 4.2)
   pg
   rails (= 3.2.13)
-  sass-rails (~> 3.2.3)
+  sass-rails
   sprockets-rails
   sqlite3
   strong_parameters
