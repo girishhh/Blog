@@ -31,7 +31,7 @@ description:
 <h4>Tags:</h4><%=@post.tag_list%>
 <br><br><br>
 
-<iframe width="250" height="250" src="<%= "http://www.youtube.com/embed/"+@post.video.split("=").last if @post.video.present?%>" alt="video is not avaialable">
+<iframe width="250" height="250" src="<%= "https://www.youtube.com/embed/"+@post.video.split("=").last if @post.video.present?%>" alt="video is not avaialable">
 </iframe><br><br>
 
 </div>
