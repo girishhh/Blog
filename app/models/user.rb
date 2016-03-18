@@ -7,6 +7,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   after_create :send_email
   def send_email
-  	UserMailer.fm_response(self.email).deliver
+  	UserMailer.send_mail(self.email).deliver
 	end
 end
