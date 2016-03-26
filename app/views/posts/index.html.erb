@@ -62,8 +62,7 @@ color: red
 </thead>
   <% @post.each do |msg| %>
 
-    <tr class="info">
-      <td ><%= msg.user.email %></td>
+    <tr class="info">    
       <td><%= image_tag msg.image.url(:thumb) %></td>
       <td><%= msg.title %></td>
       <td><%= msg.body.first(10) %></td>
