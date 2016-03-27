@@ -7,7 +7,7 @@ link_to {color: red;}
 td {color:green}
 iframe {color:black}
 body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
-color: red
+color: black;
  }
  h1 {color:white}
 .temp{
@@ -34,26 +34,65 @@ color: red
 
 <div id="tag_cloud">
   <div class="panel panel-default">
-  <div class="panel-heading custom_class" >
-  <div class="panel-body">
-  <h4>Tags:</h4>
-  <% tag_cloud Post.tag_counts, %w{s m l} do |tag, css_class| %>
-    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
-  <% end %>
-  </div>
+    <div class="panel-heading custom_class" >
+      <div class="panel-body">
+        <h4>Tags:</h4>
+          <% tag_cloud Post.tag_counts, %w{s m l} do |tag, css_class| %>
+            <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+          <% end %>
+      </div>
+    </div>
   </div>
 </div>
-</div>
+  <div class="row ">
+    <div class="col-md-2 col-md-offset-1">
+      <% @post.each do |msg| %>
+        <div id="tag_cloud">
+          <div class="panel panel-default">
+            <div class="panel-heading custom_class" >
+              <div class="panel-body">                                
+                <%= link_to msg.title, post_path(msg) %>
+                <%= link_to image_tag(msg.image.url(:thumb),:width => 70, :height => 70),post_path(msg)%>   
+                <br><br><br>
+                <center>
+                  <iframe  width="250" height="250" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>" allowfullscreen="allowfullscreen">
+                  </iframe>                  
+                </center>
+                <br>                
+                <%= msg.body.first(80) %>
+                <br><br>                
+                <div class="row ">
+                  <div class="col-md-4">
+                    <%= link_to 'comment', post_path(msg) %>
+                  </div>
 
-<table class="table table-bordered" style="border: 3px solid yellow">
+                  <div class="col-md-4">
+                    <%= link_to 'share', post_path(msg) %>
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= link_to 'tag', post_path(msg) %>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+
+
+<!-- <table class="table table-bordered" style="border: 3px solid yellow">
   <thead>
-  <tr width="2px solid yellow">
-    <th>user</th>
+  <tr width="2px solid yellow">        
     <th>image</th>
     <th>title</th>
     <th>body</th>
     <th>time</th>
     <th>video</th>
+    <th>created_by</th>
     <th>edit</th>
     <th>delete</th>
     <th>show</th>
@@ -67,12 +106,17 @@ color: red
       <td><%= msg.title %></td>
       <td><%= msg.body.first(10) %></td>
       <td><%= time_ago_in_words(msg.updated_at)%> ago</td>
-      <td><iframe width="150" height="150" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>">
+      <td><iframe  width="150" height="150" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>" allowfullscreen="allowfullscreen">
 </iframe></td>
-      <td><%if current_user.id==msg.user_id%>
-        <%= link_to 'Edit', edit_post_path(msg) %>
-         <%end%>
+      <td>
+        <%=msg.user.email%>
       </td>
+      <td>
+        <%if current_user.id==msg.user_id%>
+          <%= link_to 'Edit', edit_post_path(msg) %>
+        <%end%>
+      </td>
+
       <td>
         <%if current_user.id==msg.user_id%>
         <%= link_to 'Delete', post_path(msg),
@@ -85,7 +129,7 @@ color: red
       <td><%= raw msg.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
     </tr>
   <% end %>
-</table>
+</table> -->
 
 
 

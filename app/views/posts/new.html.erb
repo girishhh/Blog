@@ -3,14 +3,16 @@
 <style type="text/css">
 label {color: yellow}
 body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
-color:red;
+color:black;
  }
+
+ h1 {color:white}
 
 .container {
   margin:1%;
 
 }
-label {display: block;}
+label {display: block;color: lightblue;}
 
 </style>
 <body >
@@ -18,7 +20,7 @@ label {display: block;}
 
 
 <div class="page-header">
-<h1>Add post</h1>
+<h1 >Add post</h1>
 </div>
 
 <% if @post.errors.any? %>
@@ -62,7 +64,7 @@ label {display: block;}
   <p>
  <div class="container">
   <%=f.label :body %>
-  <%= f.text_area :body, :rows=>"6",:cols =>155 %>
+  <%= f.text_area :body, :rows=>"6",:cols =>85 %>
   </div>
    <%= f.hidden_field :user_id, :value => current_user.id %>
   </p>

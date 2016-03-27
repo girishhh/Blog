@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          has_many :posts
+         has_many :comments
   # attr_accessible :title, :body
   after_create :send_email
   def send_email

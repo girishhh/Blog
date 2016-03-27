@@ -21,6 +21,7 @@ float: right;
 
 <div id="navcontainer">
   <ul id="navlist">
+<li><%= button_to 'Chat Room', chat_rooms_path,:method => :get, :style=>"background:yellow"%></li>
 <li><%= button_to 'Sign out', destroy_user_session_path,:method => :delete, :style=>"background:yellow"%></li>
  <li><%= button_to 'All posts', posts_path,:method => :get, :style=>"background:yellow"%></li>
 

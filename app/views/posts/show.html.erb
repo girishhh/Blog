@@ -23,7 +23,9 @@ float: right;
  <%= time_ago_in_words(@post.updated_at) %>  ago)
 
  <br><br><br>
- post image: <%= image_tag @post.image.url(:medium) %>
+ Post image: 
+ <br><br><br>
+ <%= image_tag(@post.image.url(:medium),:width=>150,:height=>150) %>
 
 <br><br><br>
 description:

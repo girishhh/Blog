@@ -21,7 +21,7 @@ before_filter :authenticate_user!
   def edit
     @post = Post.find(params[:id])
     if(@post.user_id != current_user.id)
-      redirect_to posts_path flash[:notice] = "you are not permitted to edit this post::it belongs to other user "
+      return redirect_to posts_path flash[:notice] = "you are not permitted to edit this post::it belongs to other user "
     end
     render layout: "layout5"
   end

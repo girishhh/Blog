@@ -5,6 +5,7 @@ Devise4::Application.routes.draw do
 match 'asd'=>"posts#edit"
 match 'abc'=> "posts#update"
 
+resources :chat_rooms
 resources :users do
   resources :posts
 end
@@ -18,11 +19,10 @@ get 'tags/:tag', to: 'posts#index', as: :tag
 
 
   resources :posts do
-  collection do
-    get 'new'
-
+    collection do
+      get 'new'
+    end
   end
-end
 
 
 
