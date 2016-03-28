@@ -21,8 +21,38 @@ color: black;
   .l { font-size: 1.8em; color: red;}
 
 }
+.text_ {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
 
+sub {
+  bottom: -0.99em;
+  right: -em;
+  right: -1em;
+}
 </style>
+<script type="text/javascript">  
+  $(function(){       
+    $('.text_comment').hide();    
+    $('.link_to_comment').on('click',function(event){ 
+      event.preventDefault();           
+      var temp="#text_comment_"+ $(this).attr("id");      
+      $(temp).show();
+    });
+
+    $(".text_").keyup(function (e) {            
+      if (e.keyCode == 13) {                                 
+        $.get('/comment', {content: $(this).val(),id: $(this).attr('val')}, function() {                    
+        });        
+      }
+    });
+
+  });
+
+</script>
+
 <body >
 
 <div class="page-header">
@@ -59,21 +89,35 @@ color: black;
                   </iframe>                  
                 </center>
                 <br>                
-                <%= msg.body.first(80) %>
+                <%= msg.body.first(80) %>                
                 <br><br>                
                 <div class="row ">
                   <div class="col-md-4">
-                    <%= link_to 'comment', post_path(msg) %>
+                    <%= link_to 'comment', '#' ,:id=>"#{msg.id}",:class=>"link_to_comment"%>
                   </div>
 
                   <div class="col-md-4">
-                    <%= link_to 'share', post_path(msg) %>
+                    <%= link_to 'like', post_path(msg) %>
                   </div>
 
                   <div class="col-md-4">
                     <%= link_to 'tag', post_path(msg) %>
                   </div>
-
+                  <div id="commented_<%=msg.id%>" class="commented">
+                    <br><br>                                        
+                    <%Comment.where(post_id: msg.id).each do |comm|%>
+                      <div class="panel panel-primary">
+                        <div class="panel-heading" id="<%=Time.now%>" style="min-height: 5; max-height: 5;">
+                          <%=comm.content%><sub><%=User.find(comm.user_id).email%></sub>
+                        </div>                      
+                      </div>
+                    <%end%>
+                  </div>
+                  <div id="text_comment_<%=msg.id%>" style="display:none;" class="text_comment">
+                    <br><br>
+                    <%= text_field_tag :comment,nil,:size => "40",:val=>msg.id,:class=>"text_" %> 
+                    <br>                    
+                  </div>
                 </div>
               </div>
             </div>
@@ -82,57 +126,6 @@ color: black;
       <%end%>
     </div>
   </div>
-
-
-<!-- <table class="table table-bordered" style="border: 3px solid yellow">
-  <thead>
-  <tr width="2px solid yellow">        
-    <th>image</th>
-    <th>title</th>
-    <th>body</th>
-    <th>time</th>
-    <th>video</th>
-    <th>created_by</th>
-    <th>edit</th>
-    <th>delete</th>
-    <th>show</th>
-    <th>tags</th>
-  </tr>
-</thead>
-  <% @post.each do |msg| %>
-
-    <tr class="info">    
-      <td><%= image_tag msg.image.url(:thumb) %></td>
-      <td><%= msg.title %></td>
-      <td><%= msg.body.first(10) %></td>
-      <td><%= time_ago_in_words(msg.updated_at)%> ago</td>
-      <td><iframe  width="150" height="150" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>" allowfullscreen="allowfullscreen">
-</iframe></td>
-      <td>
-        <%=msg.user.email%>
-      </td>
-      <td>
-        <%if current_user.id==msg.user_id%>
-          <%= link_to 'Edit', edit_post_path(msg) %>
-        <%end%>
-      </td>
-
-      <td>
-        <%if current_user.id==msg.user_id%>
-        <%= link_to 'Delete', post_path(msg),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-         <%end%>
-      </td>
-
-      <td><%= link_to 'Show', post_path(msg) %></td>
-      <td><%= raw msg.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
-    </tr>
-  <% end %>
-</table> -->
-
-
-
 
 
 </body>

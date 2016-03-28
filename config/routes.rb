@@ -11,10 +11,10 @@ resources :users do
 end
 
 get 'tags/:tag', to: 'posts#index', as: :tag
-
+get '/comment'=>'posts#create_comment'
 #match "posts#show"=>"posts#edit"
   #root :to "/users/sign_in"
-  root :to => "posts#new"
+  root :to => "posts#index"
   #root to: "posts#new"
 
 

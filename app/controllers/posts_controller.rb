@@ -58,7 +58,14 @@ before_filter :authenticate_user!
 
   def show
     @post=Post.find(params[:id])
+  end
 
+  def create_comment    
+    @text_id=Time.now
+    @post_id=params[:id]
+    @content=params[:content]    
+    comment=Comment.new(post_id: params[:id].to_i,content: params[:content],user_id: current_user.id)
+    comment.save!
   end
 
   private
