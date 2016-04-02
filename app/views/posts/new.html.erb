@@ -81,10 +81,20 @@ label {display: block;color: lightblue;}
 <br>
 <p>
   <div class="container">
-<%= f.label :videoURL %>
+<%= f.label "Youtube Video URL" %>
 <%= f.text_field :video%>
 </div>
 </p>
+
+<br>
+<p>
+<div class="container">
+<%= f.label :video%>
+<%= f.file_field :video%>
+</div>
+</p>
+</br>
+
 <br>
 <p>
   <div class="container">

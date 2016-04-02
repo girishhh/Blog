@@ -27,15 +27,49 @@ color: black;
   border-radius: 5px;
 }
 
+.overlay{
+  position: absolute;
+  top: -35px;
+  left: 65px;
+  width: 40%;
+  height: 34%;
+  z-index: 10;
+  background-color: #FFFFFF;
+}       
+
+
 sub {
   bottom: -0.99em;
   right: -em;
   right: -1em;
 }
+
 </style>
+
 <script type="text/javascript">  
-  $(function(){       
-    $('.text_comment').hide();    
+  $(function(){                
+
+    $('.modal-dialog').css('width','250px');          
+
+    $('#close,#top_close').on('click',function(event){
+      $('.modal-dialog').hide({modal: true});
+    });
+
+   
+
+
+    $(".like_id").hover(function() {
+      // $("#like_id").attr('title','giri');                   
+      var postid=$(this).attr('post_id');
+      $.get('/get_liked_users_hover', {id: $(this).attr('post_id')}, function(data) { 
+        var usrs=JSON.parse(data);        
+        $('#liked'+postid).attr('title',usrs.join("\n"));        
+      });        
+
+    });
+
+    $('.text_comment').hide();  
+
     $('.link_to_comment').on('click',function(event){ 
       event.preventDefault();           
       var temp="#text_comment_"+ $(this).attr("id");      
@@ -52,6 +86,8 @@ sub {
   });
 
 </script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>  
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" ></script>
 
 <body >
 
@@ -84,20 +120,37 @@ sub {
                 <%= link_to msg.title, post_path(msg) %>
                 <%= link_to image_tag(msg.image.url(:thumb),:width => 70, :height => 70),post_path(msg)%>   
                 <br><br><br>
-                <center>
-                  <iframe  width="250" height="250" src="<%= "http://www.youtube.com/embed/"+msg.video.split("=").last if msg.video.present?%>" allowfullscreen="allowfullscreen">
-                  </iframe>                  
+                <center>                  
+                  
+                  <video width="300" height="240" controls>
+                    <source src="<%=msg.video.url%>" type="video/mp4">
+                  </video>
                 </center>
                 <br>                
                 <%= msg.body.first(80) %>                
                 <br><br>                
-                <div class="row ">
+                <div class="row ">                  
                   <div class="col-md-4">
                     <%= link_to 'comment', '#' ,:id=>"#{msg.id}",:class=>"link_to_comment"%>
                   </div>
 
-                  <div class="col-md-4">
-                    <%= link_to 'like', post_path(msg) %>
+                  <div class="col-md-4">                    
+                    <div class="row ">
+                      <div class="col-md-3">                    
+                        <%likeornot=nil%>
+                        <%likeornot=Like.find_by_post_id_and_user_id(msg.id,current_user.id)%>
+                        <%if likeornot.present?%>
+                          <%= link_to 'like',post_create_and_get_like_count_path(:post_id=>msg.id), method: :get,:remote => true, :class=>"like_id" ,:id=>"liked"+msg.id.to_s,:post_id=>msg.id,:style=>"color: blue;"%>
+                        <%else%>
+                          <%= link_to 'like',post_create_and_get_like_count_path(:post_id=>msg.id), method: :get,:remote => true, :class=>"like_id" ,:id=>"liked"+msg.id.to_s,:post_id=>msg.id%>
+                        <%end%>                      
+                        <%=render :partial=>"posts/modal_dialog", :locals => { :post_id => msg.id }%>
+                      </div>
+                      <div class="col-md-3">                    
+                        <div id="like_<%=msg.id%>">                        
+                        </div>                        
+                      </div>                      
+                    </div>
                   </div>
 
                   <div class="col-md-4">
@@ -126,7 +179,5 @@ sub {
       <%end%>
     </div>
   </div>
-
-
 </body>
 </html>

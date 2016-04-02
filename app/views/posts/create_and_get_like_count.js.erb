@@ -1,0 +1,6 @@
+$('#like_'+'<%=@post_id%>').html("<%= escape_javascript render(:partial => 'posts/like_count',:locals => { :count => @like_count }) %>");
+<%if @flag==1%>	
+	$('#liked'+'<%=@post_id%>').css('color','#337AB7');
+<%else%>
+	$('#liked'+'<%=@post_id%>').css('color','blue');
+<%end%>

@@ -1,7 +1,10 @@
 Devise4::Application.routes.draw do
   devise_for :users
 
-  resources :posts
+  resources :posts do
+    get 'create_and_get_like_count'
+    get 'get_liked_users_for_post'
+  end
 match 'asd'=>"posts#edit"
 match 'abc'=> "posts#update"
 
@@ -12,6 +15,7 @@ end
 
 get 'tags/:tag', to: 'posts#index', as: :tag
 get '/comment'=>'posts#create_comment'
+get '/get_liked_users_hover'=>'posts#get_liked_users_hover'
 #match "posts#show"=>"posts#edit"
   #root :to "/users/sign_in"
   root :to => "posts#index"
@@ -20,7 +24,7 @@ get '/comment'=>'posts#create_comment'
 
   resources :posts do
     collection do
-      get 'new'
+      get 'new'      
     end
   end
 

@@ -68,6 +68,36 @@ before_filter :authenticate_user!
     comment.save!
   end
 
+  def create_and_get_like_count
+    @flag=0
+    like_or_not=Like.find_by_post_id_and_user_id(params[:post_id],current_user.id)
+    if like_or_not.present?
+      like_or_not.destroy
+      @flag=1
+    else
+      like=Like.new(post_id: params[:post_id],user_id: current_user.id)    
+      like.save!            
+    end
+    @post_id=params[:post_id]
+    @like_count=Like.where(post_id: params[:post_id]).count    
+  end
+
+  def get_liked_users_for_post    
+    @post_id=params[:post_id]
+  end
+
+  def get_liked_users_hover
+    usrs=Like.where(post_id: params[:id].to_i).collect(&:user_id)
+    arr=[]
+    User.find_each do |usr|
+      arr<<User.find(usr).email
+    end    
+    respond_to do |format|
+      format.js {render :json=>arr}
+    end
+  end
+
+
   private
   def post_params
     params.require(:post).permit(:title, :body, :user_id,:image,:video,:tag_list)

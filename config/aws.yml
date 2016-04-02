@@ -1,0 +1,18 @@
+production:
+  access_key_id: "AKIAJUYFFWPTDDSSNO3Q"       # required
+  secret_access_key: "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"     # required
+  bucket: "cdn.1stmile.in"
+  s3_url: "http://s3.amazonaws.com"
+  queue_url: "https://sqs.us-east-1.amazonaws.com/170530556276/FirstMyle"
+development:
+  access_key_id: "AKIAJUYFFWPTDDSSNO3Q"       # required
+  secret_access_key: "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"     # required
+  bucket: "cdn.1stmile.in"
+  s3_url: "http://s3.amazonaws.com"
+  queue_url: "https://sqs.us-east-1.amazonaws.com/170530556276/FirstMyle"
+test:
+  access_key_id: "AKIAJUYFFWPTDDSSNO3Q"       # required
+  secret_access_key: "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"     # required
+  bucket: "cdn.1stmile.in"
+  s3_url: "http://s3.amazonaws.com"
+  queue_url: "https://sqs.us-east-1.amazonaws.com/170530556276/FirstMyle"

@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem  'paperclip','~> 4.2'
+gem 'aws-sdk', '< 2.0'
+gem "paperclip-ffmpeg", "~> 1.2.0"
+gem 'paperclip-av-transcoder'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

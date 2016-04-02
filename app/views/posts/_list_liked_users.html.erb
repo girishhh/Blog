@@ -1,0 +1,4 @@
+<%user_id=Like.where(post_id: post_id).collect(&:user_id)%>
+<%user_id.each do |usr|%>
+  <%=User.find(usr.to_i).email%>
+<%end%>
