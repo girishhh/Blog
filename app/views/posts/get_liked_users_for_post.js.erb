@@ -1,6 +1,6 @@
-$('.modal-dialog_<%=@post_id%>').show({modal: true});
+$('#modal-dialog_<%=@post_id%>').show({modal: true});
 $('.modal-body').html("<%= escape_javascript render(:partial => 'posts/list_liked_users',:locals => { :post_id => @post_id }) %>");
-$('.modal-dialog_<%=@post_id%>').draggable();
+$('#modal-dialog_<%=@post_id%>').draggable();
 
 
 
