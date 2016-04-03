@@ -7,7 +7,8 @@ gem "paperclip-ffmpeg", "~> 1.2.0"
 gem 'paperclip-av-transcoder'
 gem "therubyracer"
 gem "less-rails" 
-gem "twitter-bootstrap-rails"
+gem 'bootstrap-sass', '3.2.0.2'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
