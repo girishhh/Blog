@@ -5,6 +5,9 @@ gem  'paperclip','~> 4.2'
 gem 'aws-sdk', '< 2.0'
 gem "paperclip-ffmpeg", "~> 1.2.0"
 gem 'paperclip-av-transcoder'
+gem "therubyracer"
+gem "less-rails" 
+gem "twitter-bootstrap-rails"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
