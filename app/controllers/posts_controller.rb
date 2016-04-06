@@ -50,6 +50,8 @@ before_filter :authenticate_user!
   def create
     @post = Post.new(post_params)
     if @post.save
+      p "123"
+      p @post
       redirect_to @post
     else
       render 'new'
@@ -100,6 +102,6 @@ before_filter :authenticate_user!
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, :user_id,:image,:video,:tag_list)
+    params.require(:post).permit(:title, :body, :user_id,:image,:video,:tag_list,:you_tube_video)
   end
 end

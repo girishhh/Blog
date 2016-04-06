@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160402062751) do
+ActiveRecord::Schema.define(:version => 20160406134906) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20160402062751) do
     t.string   "video_content_type"
     t.integer  "video_file_size"
     t.datetime "video_updated_at"
+    t.text     "you_tube_video"
   end
 
   create_table "taggings", :force => true do |t|

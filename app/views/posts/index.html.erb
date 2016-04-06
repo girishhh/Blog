@@ -47,12 +47,12 @@ sub {
 </style>
 
 <script type="text/javascript">  
-  $(function(){                
-
+  $(function(){              
+        
     $('.modal-dialog').css('width','250px');          
 
-    $('#close,#top_close').on('click',function(event){
-      $('.modal-dialog').hide({modal: true});
+    $('.close1').on('click',function(event){      
+      $('#modal-dialog_'+$(this).attr('closeid')).hide({modal: true});
     });
 
    
@@ -118,20 +118,35 @@ sub {
             <div class="panel-heading custom_class" >
               <div class="panel-body">                                
                 <%= link_to msg.title, post_path(msg) %>
-                <%= link_to image_tag(msg.image.url(:thumb),:width => 70, :height => 70),post_path(msg)%>   
+                <%if msg.image.url!="/images/original/missing.png"%>
+                  <%= link_to image_tag(msg.image.url(:thumb),:width => 70, :height => 70),post_path(msg)%>
+                <%else%>
+                  <%= link_to image_tag("http://www.bandit.fm/web/img/no-image.png",:size=>"70x70"),post_path(msg)%>                  
+                <%end%>   
                 <br><br><br>
-                <center>                  
-                  
+                <%if msg.video.url!="/videos/original/missing.png" && msg.you_tube_video.present? %>
+                  <% url="//www.youtube.com/embed/"+msg.you_tube_video.split("=").last%>
+                    <video width="300" height="240" controls>
+                      <source src="<%=msg.video.url%>" type="video/mp4">
+                    </video>         
+                    <br>                                               
+                    <br>
+                    <iframe width="300" height="240" src="<%=url%>" frameborder="0" allowfullscreen="allowfullscreen" id="iframe">
+                    </iframe>                                                              
+                <%elsif msg.video.url!="/videos/original/missing.png"%>
                   <video width="300" height="240" controls>
                     <source src="<%=msg.video.url%>" type="video/mp4">
                   </video>
-                </center>
+                <%else msg.you_tube_video.present?%>
+                  <% url="//www.youtube.com/embed/"+msg.you_tube_video.split("=").last%>
+                  <iframe width="300" height="240" src="<%=url%>" frameborder="0" allowfullscreen="allowfullscreen" id="iframe"></iframe>
+                <%end%>
                 <br>                
-                <%= msg.body.first(80) %>                
+                <%= msg.body.first(120)%> <%=link_to "more.......",post_path(msg)%>
                 <br><br>                
                 <div class="row ">                  
                   <div class="col-md-4">
-                    <%= link_to 'comment', '#' ,:id=>"#{msg.id}",:class=>"link_to_comment"%>
+                    <%= link_to 'comment', '#' ,:id=>"#{msg.id}",:class=>"link_to_comment",:style=>"font-style: italic;"%>
                   </div>
 
                   <div class="col-md-4">                    
@@ -140,9 +155,9 @@ sub {
                         <%likeornot=nil%>
                         <%likeornot=Like.find_by_post_id_and_user_id(msg.id,current_user.id)%>
                         <%if likeornot.present?%>
-                          <%= link_to 'like',post_create_and_get_like_count_path(:post_id=>msg.id), method: :get,:remote => true, :class=>"like_id" ,:id=>"liked"+msg.id.to_s,:post_id=>msg.id,:style=>"color: blue;"%>
+                          <%= link_to 'like',post_create_and_get_like_count_path(:post_id=>msg.id), method: :get,:remote => true, :class=>"like_id" ,:id=>"liked"+msg.id.to_s,:post_id=>msg.id,:style=>"color: blue; font-style: italic;"%>
                         <%else%>
-                          <%= link_to 'like',post_create_and_get_like_count_path(:post_id=>msg.id), method: :get,:remote => true, :class=>"like_id" ,:id=>"liked"+msg.id.to_s,:post_id=>msg.id%>
+                          <%= link_to 'like',post_create_and_get_like_count_path(:post_id=>msg.id), method: :get,:remote => true, :class=>"like_id" ,:id=>"liked"+msg.id.to_s,:post_id=>msg.id,:style=>"font-style: italic;"%>
                         <%end%>                      
                         <%=render :partial=>"posts/modal_dialog", :locals => { :post_id => msg.id }%>
                       </div>
@@ -154,7 +169,7 @@ sub {
                   </div>
 
                   <div class="col-md-4">
-                    <%= link_to 'tag', post_path(msg) %>
+                    <%= link_to 'tag', post_path(msg),:style=>"font-style: italic;" %>
                   </div>
                   <div id="commented_<%=msg.id%>" class="commented">
                     <br><br>                                        

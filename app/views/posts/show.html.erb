@@ -19,27 +19,45 @@ float: right;
     <li><%= button_to 'All posts', posts_path,:method => :get, :style=>"background:lightblue"%></li>
   </ul>
 </div>
- <h1>Title:</h1> <h2> <%= @post.title%></h2> ( submitted
- <%= time_ago_in_words(@post.updated_at) %>  ago)
+<h2> <%= @post.title%></h2>
 
  <br><br><br>
- Post image: 
+
  <br><br><br>
- <%= image_tag @post.image.url %>
+ <%if @post.image.url!="/images/original/missing.png"%>
+  <%= image_tag(@post.image.url,:size=>"300x300") %>
+ <%else%>
+  <%= image_tag("http://www.bandit.fm/web/img/no-image.png",:size=>"300x300") %>
+ <%end%> 
 
  
 
 <br><br><br>
 description:
 <%=@post.body%><br>
+<br><br><br>
 <h4>Tags:</h4><%=@post.tag_list%>
 <br><br><br>
 
 
+<div class ="row">
+<%if @post.video.url!="/videos/original/missing.png"%>
+  <div class="col-md-6">
+    <video width="300" height="300" controls>
+      <source src="<%=@post.video.url%>" type="video/mp4">
+    </video>
+  </div>
+<%end%>
+<%if @post.you_tube_video.present? %>
+  <div class="col-md-6">
+    <% url="//www.youtube.com/embed/"+@post.you_tube_video.split("=").last%>
+    <iframe width="300" height="300" src="<%=url%>" frameborder="0" allowfullscreen="allowfullscreen">    
+    </iframe>  
+  </div>
+<%end%>
+</div>
 
-<video width="300" height="240" controls>
-  <source src="<%=@post.video.url%>" type="video/mp4">
-</video>
+
 
 
 </div>

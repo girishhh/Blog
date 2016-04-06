@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
-  attr_accessible :body, :title, :user_id, :image,:video,:tag_list
+  attr_accessible :body, :title, :user_id, :image,:video,:tag_list, :you_tube_video
   validates :title,  presence: true, length: { maximum: 20 }
   validates :body,  presence: true, length: { maximum: 5000 }
   validates :user_id,  presence: true

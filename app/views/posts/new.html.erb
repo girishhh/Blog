@@ -63,7 +63,7 @@ label {display: block;color: lightblue;}
 
   <p>
  <div class="container">
-  <%=f.label :body %>
+  <%=f.label :content %>
   <%= f.text_area :body, :rows=>"6",:cols =>85 %>
   </div>
    <%= f.hidden_field :user_id, :value => current_user.id %>
@@ -82,7 +82,7 @@ label {display: block;color: lightblue;}
 <p>
   <div class="container">
 <%= f.label "Youtube Video URL" %>
-<%= f.text_field :video%>
+<%= f.text_field :you_tube_video%>
 </div>
 </p>
 

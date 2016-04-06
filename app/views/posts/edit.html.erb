@@ -65,15 +65,18 @@ label {display: block;}
 
 <p>
   <div class="container">
-<%= f.label :video%>
-<%= f.text_field :video%>
+<%= f.label "you tube video url"%>
+<%= f.text_field :you_tube_video%>
 </div>
 </p>
 
-
-
-
-
+<p>
+  <div class="container">
+<%= f.label :video%>
+<%= f.file_field :video%>
+</div>
+</p>
+<br>
   <p>
     <div class="container">
     <%=f.submit %>
